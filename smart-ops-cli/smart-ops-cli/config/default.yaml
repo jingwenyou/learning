@@ -1,0 +1,60 @@
+# Smart Ops CLI 默认配置
+# 基于《性能之巅》性能工程方法论
+
+thresholds:
+  # CPU阈值 (基于《性能之巅》标准)
+  cpu:
+    warning: 70      # 利用率 > 70% 告警
+    critical: 90    # 利用率 > 90% 危险
+  # 负载阈值 (相对于CPU核心数的归一化值)
+  load:
+    warning: 2.0    # 归一化负载 > 2 告警
+    critical: 4.0   # 归一化负载 > 4 危险
+  # 内存阈值
+  memory:
+    warning: 80      # 利用率 > 80% 告警
+    critical: 95     # 利用率 > 95% 危险
+  # 磁盘阈值
+  disk:
+    warning: 80      # 利用率 > 80% 告警
+    critical: 90     # 利用率 > 90% 危险
+
+report:
+  formats:
+    - json
+    - html
+    - markdown
+  output_dir: ./reports
+
+port_scan:
+  timeout: 3        # 端口扫描超时(秒)
+  max_workers: 10   # 最大并发数
+
+process:
+  top_n: 10
+  sort_by: cpu      # cpu, mem, threads
+
+# 《性能之巅》关键性能指标参考阈值
+# 这些阈值用于判断Saturation(饱和度)
+metrics_thresholds:
+  # CPU饱和度
+  cpu:
+    iowait_warning: 20     # iowait > 20% 告警
+    iowait_critical: 50    # iowait > 50% 危险
+    load_normalized_warning: 2.0   # 归一化负载 > 2 告警
+    load_normalized_critical: 4.0  # 归一化负载 > 4 危险
+  # 内存饱和度
+  memory:
+    swap_warning: 10       # 交换使用 > 10% 告警
+    swap_critical: 50      # 交换使用 > 50% 危险
+  # 磁盘I/O饱和度
+  disk:
+    await_warning: 10       # 平均I/O响应 > 10ms 告警
+    await_critical: 50     # 平均I/O响应 > 50ms 危险
+    avgqu_warning: 4        # 平均队列深度 > 4 告警
+    avgqu_critical: 16      # 平均队列深度 > 16 危险
+  # 网络饱和度
+  network:
+    util_warning: 70        # 带宽使用 > 70% 告警
+    util_critical: 90       # 带宽使用 > 90% 危险
+    retransmit_warning: 1   # 重传率 > 1% 告警

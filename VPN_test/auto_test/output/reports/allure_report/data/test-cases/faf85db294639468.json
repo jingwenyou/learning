@@ -1,0 +1,41 @@
+{
+  "uid" : "faf85db294639468",
+  "name" : "示例测试用例",
+  "fullName" : "test.sample.test_case",
+  "historyId" : "sample-history-1",
+  "time" : {
+    "start" : 1776824537669,
+    "stop" : 1776824537669,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "示例套件"
+  }, {
+    "name" : "testClass",
+    "value" : "SampleTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_case"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "faf85db294639468.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,199 @@
+cases: 
+- case_name: 配置firewall,name空格,协议all,修改策略,按照源ip查询
+  set_firewall:  {"name": " ","src_ip": "1.1.1.1/32","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "10.81.0.0/0",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv4"}
+  get_res: {"proto": "all","dest_ip": {"type": "ipv4","ipaddr": "10.81.0.0","masklen": 0},"src_port": "-","src": "work",
+            "name": " ","src_ip": {"type": "ipv4","ipaddr": "1.1.1.1","masklen": 32},"target": "ACCEPT","dest_port": "-"}
+  change_firewall: {"name": " ","src_ip": "1.1.1.1/32","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "10.81.0.0/0",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv4"}
+  get_firewall: {"src_ip": "1.1.1.1/32"}
+  del_firewall: {"name": " "}
+- case_name: 配置firewall,name 汉字,协议icmp,修改dest_ip,按照源端口查询,不命中
+  set_firewall:  {"name": "汉字","src_ip": "0.0.0.0/32","proto": "icmp","src_sport": 0,"src_dport": 0,"dest_ip": "192.168.110.1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv4"}
+  get_res: {"proto": "icmp","dest_ip": {"type": "ipv4","ipaddr": "192.168.110.1","masklen": 32},"src_port": "-","src": "work","name": "汉字",
+            "src_ip": {"type": "ipv4","ipaddr": "0.0.0.0","masklen": 32},"target": "REJECT","dest_port": "-"}
+  change_firewall: {"name": "汉字","src_ip": "0.0.0.0/32","proto": "icmp","src_sport": 0,"src_dport": 0,"dest_ip": "192.168.1.1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv4"}
+  get_firewall: {"src_port": '0'}
+  del_firewall: {"name": "汉字"}
+- case_name: 配置firewall,name 英文,协议tcp,修改dest_dport,按照目的端口查询
+  set_firewall:  {"name": "abcdefghijklmnopqrstuvwxyz","src_ip": "254.254.254.255/0","proto": "tcp","src_sport": 0,"src_dport": 65535,"dest_ip": "192.168.110.1/32",
+            "dest_sport": 0,"dest_dport": 65535,"target": "ACCEPT","family": "ipv4"}
+  get_res: {"proto": "tcp","dest_ip": {"type": "ipv4","ipaddr": "192.168.110.1","masklen": 32},"src_port": "-","src": "work","name": "abcdefghijklmnopqrstuvwxyz",
+          "src_ip": {"type": "ipv4","ipaddr": "254.254.254.255","masklen": 0},"target": "ACCEPT","dest_port": "-"}
+  change_firewall: {"name": "abcdefghijklmnopqrstuvwxyz","src_ip": "254.254.254.255/0","proto": "tcp","src_sport": 0,"src_dport": 0,"dest_ip": "192.168.110.1/32",
+            "dest_sport": 0,"dest_dport": 65534,"target": "ACCEPT","family": "ipv4"}
+  get_firewall: {"dst_port": '0'}
+  del_firewall: {"name": "abcdefghijklmnopqrstuvwxyz"}
+- case_name: 配置firewall,name 数字,协议udp,修改dest_sport,按照目的IP查询
+  set_firewall:  {"name": "1234567890","src_ip": "127.0.0.1/8","proto": "udp","src_sport": 0,"src_dport": 0,"dest_ip": "192.168.1.1/16",
+            "dest_sport": 0,"dest_dport": 9,"target": "REJECT","family": "ipv4"}
+  get_res: {"proto": "udp","dest_ip": {"type": "ipv4","ipaddr": "192.168.1.1","masklen": 16},"src_port": "-","src": "work","name": "1234567890",
+            "src_ip": {"type": "ipv4","ipaddr": "127.0.0.1","masklen": 8},"target": "REJECT","dest_port": "-"}
+  change_firewall: {"name": "1234567890","src_ip": "127.0.0.1/8","proto": "udp","src_sport": 0,"src_dport": 0,"dest_ip": "192.168.1.1/16",
+            "dest_sport": 1,"dest_dport": 9,"target": "ACCEPT","family": "ipv4"}
+  get_firewall: {"dst_ip": '192.168.1.1/16'}
+  del_firewall: {"name": "1234567890"}
+- case_name: 配置firewall,name 特殊字符,协议all,修改src_IP,按照协议查询
+  set_firewall:  {"name": "!@$%^&*()-_+={}:;<>?/~","src_ip": "192.168.1.1/16","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "10.81.220.172/17",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv4"}
+  get_res: {"proto": "all","dest_ip": {"type": "ipv4","ipaddr": "10.81.220.172","masklen": 17},"src_port": "-",
+            "src": "work", "name": "!@$%^&*()-_+={}:;<>?/~","src_ip": {"type": "ipv4","ipaddr": "192.168.1.1","masklen": 16},"target": "ACCEPT","dest_port": "-"}
+  change_firewall: {"name": "!@$%^&*()-_+={}:;<>?/~","src_ip": "192.168.1.0/16","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "10.81.220.172/17",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv4"}
+  get_firewall: {"proto": "all"}
+  del_firewall: {"name": "!@$%^&*()-_+={}:;<>?/~"}
+- case_name: 配置firewall,name 超长,协议icmp,修改src_IP,组合查询
+  set_firewall:  {"name": "~!@#$%^&*()-_+={}[]:<>.?/,.1234567890qwertyuiopasdfghjklzxcvbnm红红火火恍恍惚惚哈哈哈哈密密麻麻们","src_ip": "10.81.220.172/17","proto": "icmp","src_sport": 0,"src_dport": 0,"dest_ip": "127.0.0.1/8",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv4"}
+  get_res: {"proto": "icmp","dest_ip": {"type": "ipv4","ipaddr": "127.0.0.1","masklen": 8},"src_port": "-","src": "work","name": "~!@#$%^&*()-_+={}[]:<>.?/,.1234567890qwertyuiopasdfghjklzxcvbnm红红火火恍恍惚惚哈哈哈哈密密麻麻们",
+            "src_ip": {"type": "ipv4","ipaddr": "10.81.220.172","masklen": 17},"target": "REJECT","dest_port": "-"}
+  change_firewall: {"name": "~!@#$%^&*()-_+={}[]:<>.?/,.1234567890qwertyuiopasdfghjklzxcvbnm红红火火恍恍惚惚哈哈哈哈密密麻麻们","src_ip": "0.0.0.0/32","proto": "icmp","src_sport": 0,"src_dport": 0,"dest_ip": "127.0.0.1/8",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv4"}
+  get_firewall: {"proto": "icmp","src_ip": "0.0.0.0/32","dest_ip": "127.0.0.1/8"}
+  del_firewall: {"name": "~!@#$%^&*()-_+={}[]:<>.?/,.1234567890qwertyuiopasdfghjklzxcvbnm红红火火恍恍惚惚哈哈哈哈密密麻麻们"}
+- case_name: 配置firewall,name 数字,协议udp,修改src_sport,查询不命中
+  set_firewall:  {"name": "0","src_ip": "0.0.0.0/32","proto": "udp","src_sport": 65535,"src_dport": 65535,"dest_ip": "254.254.254.255/0",
+            "dest_sport": 65535,"dest_dport": 65535,"target": "ACCEPT","family": "ipv4"}
+  get_res: {"proto": "udp","dest_ip": {"type": "ipv4","ipaddr": "254.254.254.255","masklen": 0},"src_port": "65535","src": "work","name": "0",
+            "src_ip": {"type": "ipv4","ipaddr": "0.0.0.0","masklen": 32},"target": "ACCEPT","dest_port": "65535"}
+  change_firewall: {"name": "0","src_ip": "0.0.0.0/32","proto": "udp","src_sport": 65534,"src_dport": 65535,"dest_ip": "254.254.254.255/0",
+            "dest_sport": 65535,"dest_dport": 65535,"target": "ACCEPT","family": "ipv4"}
+  get_firewall: {"src_ip": "0.0.0.0/24"}
+  del_firewall: {"name": "0"}
+- case_name: 配置firewall,name 英文,协议tcp,修改src_dport,端口范围查询
+  set_firewall:  {"name": "A","src_ip": "0.0.0.0/32","proto": "tcp","src_sport": 1,"src_dport": 1,"dest_ip": "192.168.1.1/32",
+            "dest_sport": 1,"dest_dport": 1,"target": "REJECT","family": "ipv4"}
+  get_res: {"proto": "tcp","dest_ip": {"type": "ipv4","ipaddr": "192.168.1.1","masklen": 32},"src_port": "1","src": "work","name": "A",
+            "src_ip": {"type": "ipv4","ipaddr": "0.0.0.0","masklen": 32},"target": "REJECT","dest_port": "1"}
+  change_firewall: {"name": "A","src_ip": "0.0.0.0/32","proto": "tcp","src_sport": 1,"src_dport": 65534,"dest_ip": "192.168.1.1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv4"}
+  get_firewall: {"src_port": '1-65534'}
+  del_firewall: {"name": "A"}
+- case_name: 配置firewall,name 下划线,协议all,修改协议为ipv6,端口范围包含查询，查询不命中
+  set_firewall:  {"name": "__init__","src_ip": "0.0.0.0/32","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "1.1.1.1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv4"}
+  get_res: {"proto": "all","dest_ip": {"type": "ipv4","ipaddr": "1.1.1.1","masklen": 32},"src_port": "-",
+            "src": "work", "name": "__init__","src_ip": {"type": "ipv4","ipaddr": "0.0.0.0","masklen": 32},"target": "ACCEPT","dest_port": "-"}
+  change_firewall: {"name": "__init__","src_ip": "::/32","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "1111::1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv6"}
+  get_firewall: {"src_port": '1-65535'}
+  del_firewall: {"name": "__init__"}
+- case_name: 配置firewall,name 英文,协议udp,修改src_dport,端口范围查询
+  set_firewall:  {"name": "exit 0","src_ip": "0.0.0.0/0","proto": "udp","src_sport": 161,"src_dport": 162,"dest_ip": "192.168.1.1/32",
+            "dest_sport": 161,"dest_dport": 162,"target": "ACCEPT","family": "ipv4"}
+  get_res: {"proto": "udp","dest_ip": {"type": "ipv4","ipaddr": "192.168.1.1","masklen": 32},"src_port": "161-162","src": "work","name": "exit 0",
+            "src_ip": {"type": "ipv4","ipaddr": "0.0.0.0","masklen": 0},"target": "ACCEPT","dest_port": "161-162"}
+  change_firewall: {"name": "exit 0","src_ip": "0.0.0.0/0","proto": "udp","src_sport": 161,"src_dport": 169,"dest_ip": "192.168.1.1/32",
+            "dest_sport": 161,"dest_dport": 162,"target": "ACCEPT","family": "ipv4"}
+  get_firewall: {"src_port": '161-169'}
+  del_firewall: {"name": "exit 0"}
+- case_name: 配置ipv6 firewall,name空格,协议all,修改策略,按照源ip查询
+  set_firewall:  {"name": " ","src_ip": "1::1/128","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "2010:aa81::/0",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv6"}
+  get_res: {"proto": "all","dest_ip": {"type": "ipv6","ipaddr": "2010:aa81::","masklen": 0},"src_port": "-","src": "work","name": " ",
+            "src_ip": {"type": "ipv6","ipaddr": "1::1","masklen": 128},"target": "ACCEPT","dest_port": "-"}
+  change_firewall: {"name": " ","src_ip": "1::1/128","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "2010:aa81::/0",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv6"}
+  get_firewall: {"src_ip": "1::1/128"}
+  del_firewall: {"name": " "}
+- case_name: 配置ipv6 firewall,name 汉字,协议icmp,修改dest_ip,按照源端口查询，不命中
+  set_firewall:  {"name": "中国台湾省","src_ip": "::/128","proto": "icmp","src_sport": 0,"src_dport": 0,"dest_ip": "aaaa:bbbb:cccc:dddd:1111:2222:eeee:ffff/128",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv6"}
+  get_res: {"proto": "icmp","dest_ip": {"type": "ipv6","ipaddr": "aaaa:bbbb:cccc:dddd:1111:2222:eeee:ffff","masklen": 128},"src_port": "-","src": "work","name": "中国台湾省",
+            "src_ip": {"type": "ipv6","ipaddr": "::","masklen": 128},"target": "REJECT","dest_port": "-"}
+  change_firewall: {"name": "中国台湾省","src_ip": "::/128","proto": "icmp","src_sport": 0,"src_dport": 0,"dest_ip": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff/128",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv6"}
+  get_firewall: {"src_port": '0'}
+  del_firewall: {"name": "中国台湾省"}
+- case_name: 配置ipv6 firewall,name 英文,协议tcp,修改dest_dport,按照目的端口查询
+  set_firewall:  {"name": "if 1","src_ip": "ff::1/0","proto": "tcp","src_sport": 0,"src_dport": 65535,"dest_ip": "aaaa:bbbb:cccc:dddd:1111:2222:eeee:ffff/128",
+            "dest_sport": 0,"dest_dport": 65535,"target": "ACCEPT","family": "ipv6"}
+  get_res: {"proto": "tcp","dest_ip": {"type": "ipv6","ipaddr": "aaaa:bbbb:cccc:dddd:1111:2222:eeee:ffff","masklen": 128},"src_port": "-","src": "work","name": "if 1",
+            "src_ip": {"type": "ipv6","ipaddr": "ff::1","masklen": 0},"target": "ACCEPT","dest_port": "-"}
+  change_firewall: {"name": "if 1","src_ip": "ff::1/0","proto": "tcp","src_sport": 0,"src_dport": 65535,"dest_ip": "aaaa:bbbb:cccc:dddd:1111:2222:eeee:ffff/128",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv6"}
+  get_firewall: {"dst_port": '-'}
+  del_firewall: {"name": "if 1"}
+- case_name: 配置ipv6 firewall,name 数字,协议udp,修改dest_sport,按照目的IP查询
+  set_firewall:  {"name": "00001","src_ip": "1::1/64","proto": "udp","src_sport": 0,"src_dport": 0,"dest_ip": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff/96",
+            "dest_sport": 9,"dest_dport": 9,"target": "REJECT","family": "ipv6"}
+  get_res: {"proto": "udp","dest_ip": {"type": "ipv6","ipaddr": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff","masklen": 96},"src_port": "-","src": "work","name": "00001",
+            "src_ip": {"type": "ipv6","ipaddr": "1::1","masklen": 64},"target": "REJECT","dest_port": "9"}
+  change_firewall: {"name": "00001","src_ip": "1::1/64","proto": "udp","src_sport": 0,"src_dport": 0,"dest_ip": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff/96",
+            "dest_sport": 7,"dest_dport": 9,"target": "REJECT","family": "ipv6"}
+  get_firewall: {"dest_ip": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff/96"}
+  del_firewall: {"name": "00001"}
+- case_name: 配置ipv6 firewall,name 特殊字符,协议all,修改src_IP,按照协议查询
+  set_firewall:  {"name": ".*?","src_ip": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff/64","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "1001:8881:22aa:1721:0000::1/85",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv6"}
+  get_res: {"proto": "all","dest_ip": {"type": "ipv6","ipaddr": "1001:8881:22aa:1721:0000::1","masklen": 85},"src_port": "-","src": "work","name": ".*?",
+            "src_ip": {"type": "ipv6","ipaddr": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff","masklen": 64},"target": "ACCEPT","dest_port": "-"}
+  change_firewall: {"name": ".*?","src_ip": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff/128","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "1001:8881:22aa:1721:0000::1/85",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv6"}
+  get_firewall: {"proto": "all"}
+  del_firewall: {"name": ".*?"}
+- case_name: 配置ipv6 firewall,name 超长,协议icmp,修改src_IP,组合查询
+  set_firewall:  {"name": "中国汉字博大精深abcdefghijklmnopqrstuvwxyz1234567890~!#$@%^&*()-_+={}[]:;<>.?/","src_ip": "1001:8881:22aa:1721:0000::1/85","proto": "icmp","src_sport": 0,"src_dport": 0,"dest_ip": "1::1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv6"}
+  get_res: {"proto": "icmp","dest_ip": {"type": "ipv6","ipaddr": "1::1","masklen": 32},"src_port": "-","src": "work","name": "中国汉字博大精深abcdefghijklmnopqrstuvwxyz1234567890~!#$@%^&*()-_+={}[]:;<>.?/",
+            "src_ip": {"type": "ipv6","ipaddr": "1001:8881:22aa:1721:0000::1","masklen": 85},"target": "REJECT","dest_port": "-"}
+  change_firewall: {"name": "中国汉字博大精深abcdefghijklmnopqrstuvwxyz1234567890~!#$@%^&*()-_+={}[]:;<>.?/","src_ip": "1001:8881:22aa:1721:0000::3333/85","proto": "icmp","src_sport": 0,"src_dport": 0,"dest_ip": "1::1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv6"}
+  get_firewall: {"src_ip": "1001:8881:22aa:1721:0000::3333/85","proto": "icmp","dest_ip": "1::1/32",}
+  del_firewall: {"name": "中国汉字博大精深abcdefghijklmnopqrstuvwxyz1234567890~!#$@%^&*()-_+={}[]:;<>.?/"}
+- case_name: 配置ipv6 firewall,name 数字,协议udp,修改src_sport
+  set_firewall:  {"name": "65535","src_ip": "::/128","proto": "udp","src_sport": 65535,"src_dport": 65535,"dest_ip": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff/0",
+            "dest_sport": 65535,"dest_dport": 65535,"target": "ACCEPT","family": "ipv6"}
+  get_res: {"proto": "udp","dest_ip": {"type": "ipv6","ipaddr": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff","masklen": 0},"src_port": "65535","src": "work","name": "65535",
+            "src_ip": {"type": "ipv6","ipaddr": "::","masklen": 128},"target": "ACCEPT","dest_port": "65535"}
+  change_firewall: {"name": "65535","src_ip": "::/128","proto": "udp","src_sport": 65530,"src_dport": 65535,"dest_ip": "aaaa:bbbb:cccc:dddd:1111:3333:eeee:ffff/0",
+            "dest_sport": 65535,"dest_dport": 65535,"target": "ACCEPT","family": "ipv6"}
+  get_firewall: {"src_port": '65534'}
+  del_firewall: {"name": "65535"}
+- case_name: 配置ipv6 firewall,name 英文,协议tcp,修改src_dport,端口范围查询
+  set_firewall:  {"name": "汉字","src_ip": "::1/128","proto": "tcp","src_sport": 1,"src_dport": 9,"dest_ip": "::/128",
+            "dest_sport": 1,"dest_dport": 1,"target": "REJECT","family": "ipv6"}
+  get_res: {"proto": "tcp","dest_ip": {"type": "ipv6","ipaddr": "::","masklen": 128},"src_port": "1-9","src": "work","name": "汉字",
+            "src_ip": {"type": "ipv6","ipaddr": "::1","masklen": 128},"target": "REJECT","dest_port": "1"}
+  change_firewall:  {"name": "汉字","src_ip": "::/128","proto": "tcp","src_sport": 1,"src_dport": 8,"dest_ip": "::1/128",
+            "dest_sport": 1,"dest_dport": 1,"target": "REJECT","family": "ipv6"}
+  get_firewall: {"src_port": '1-8'}
+  del_firewall: {"name": "汉字"}
+- case_name: 配置ipv6 firewall,name 下划线,协议all,修改协议,端口范围包含查询，不命中
+  set_firewall:  {"name": "__name__","src_ip": "::/128","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "1111:1111:1111:1111:1111:1111:1111:1111/128",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv6"}
+  get_res: {"proto": "all","dest_ip": {"type": "ipv6","ipaddr": "1111:1111:1111:1111:1111:1111:1111:1111","masklen": 128},"src_port": "-","src": "work","name": "__name__",
+            "src_ip": {"type": "ipv6","ipaddr": "::","masklen": 128},"target": "ACCEPT","dest_port": "-"}
+  change_firewall: {"name": "__name__","src_ip": "::/128","proto": "udp","src_sport": 0,"src_dport": 0,"dest_ip": "1111:1111:1111:1111:1111:1111:1111:1111/128",
+            "dest_sport": 3,"dest_dport": 6,"target": "ACCEPT","family": "ipv6"}
+  get_firewall: {"src_port": '0-65535'}
+  del_firewall: {"name": "__name__"}
+- case_name: 配置ipv6 firewall,name 英文,协议udp,修改src_dport,端口范围查询
+  set_firewall:  {"name": "reboot -f","src_ip": "::/0","proto": "udp","src_sport": 161,"src_dport": 162,"dest_ip": "::/128",
+            "dest_sport": 161,"dest_dport": 162,"target": "ACCEPT","family": "ipv6"}
+  get_res: {"proto": "udp","dest_ip": {"type": "ipv6","ipaddr": "::","masklen": 128},"src_port": "161-162","src": "work","name": "reboot -f",
+            "src_ip": {"type": "ipv6","ipaddr": "::","masklen": 0},"target": "ACCEPT","dest_port": "161-162"}
+  change_firewall: {"name": "reboot -f","src_ip": "::/0","proto": "udp","src_sport": 161,"src_dport": 164,"dest_ip": "::/128",
+            "dest_sport": 161,"dest_dport": 162,"target": "ACCEPT","family": "ipv6"}
+  get_firewall: {"src_port": '161-164'}
+  del_firewall: {"name": "reboot -f"}
+- case_name: 配置ipv6 firewall,name 英文,协议udp,修改src_dport,端口范围查询,不命中，端口范围其他字符
+  set_firewall:  {"name": "reboot -f","src_ip": "::/0","proto": "udp","src_sport": 161,"src_dport": 162,"dest_ip": "::/128",
+            "dest_sport": 161,"dest_dport": 162,"target": "ACCEPT","family": "ipv6"}
+  get_res: {"proto": "udp","dest_ip": {"type": "ipv6","ipaddr": "::","masklen": 128},"src_port": "161-162","src": "work","name": "reboot -f",
+            "src_ip": {"type": "ipv6","ipaddr": "::","masklen": 0},"target": "ACCEPT","dest_port": "161-162"}
+  change_firewall: {"name": "reboot -f","src_ip": "::/0","proto": "udp","src_sport": 161,"src_dport": 164,"dest_ip": "::/128",
+            "dest_sport": 161,"dest_dport": 162,"target": "ACCEPT","family": "ipv6"}
+  get_firewall: {"src_port": 'a'}
+  del_firewall: {"name": "reboot -f"}
+- case_name: 配置ipv6 firewall,name 下划线,协议all,修改协议为ipv4,按照协议查询查询
+  set_firewall: {"name": "__init__","src_ip": "::/32","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "1111::1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "REJECT","family": "ipv6"}
+  get_res: {"proto": "all","dest_ip": {"type": "ipv6","ipaddr": "1111::1","masklen": 32},"src_port": "-","src": "work","name": "__init__",
+            "src_ip": {"type": "ipv6","ipaddr": "::","masklen": 32},"target": "REJECT","dest_port": "-"}
+  change_firewall:  {"name": "__init__","src_ip": "0.0.0.0/32","proto": "all","src_sport": 0,"src_dport": 0,"dest_ip": "1.1.1.1/32",
+            "dest_sport": 0,"dest_dport": 0,"target": "ACCEPT","family": "ipv4"}
+  get_firewall: {"proto": 'all'}
+  del_firewall: {"name": "__init__"}

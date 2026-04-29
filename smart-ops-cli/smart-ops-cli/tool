@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""
+Smart Ops CLI - 可执行入口脚本
+用于直接运行: tool <command>
+
+使用方式:
+    tool info
+    tool check
+    tool port localhost 22 80 443
+    tool ps --sort=cpu --num=10
+    tool report --format=html -o report.html
+"""
+import sys
+import os
+
+# 添加项目根目录到路径
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from src.cli.main import main
+
+if __name__ == "__main__":
+    main()

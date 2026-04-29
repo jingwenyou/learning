@@ -1,0 +1,22 @@
+# Smart Ops CLI 日志轮转配置
+# 放置于 /etc/logrotate.d/smart-ops
+
+# 日志文件路径（需与systemd service配置一致）
+/var/log/smart-ops.log {
+    daily                 # 每天轮转
+    rotate 14             # 保留14天（约两周）
+    compress             # 压缩旧日志
+    delaycompress         # 延迟压缩（上次轮转的先保留）
+    missingok            # 日志不存在不报错
+    notifempty           # 空日志不轮转
+    create 0640 ops ops  # 新日志权限（属主ops）
+
+    # 轮转后执行（通知服务重新打开日志）
+    sharedscripts
+    postrotate
+        systemctl reload smart-ops > /dev/null 2>&1 || true
+    endscript
+}
+
+# journald 日志由 systemd 自行管理
+# 如需查看：journalctl -u smart-ops -f

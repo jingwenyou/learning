@@ -1,0 +1,7 @@
+{
+  "tool_name": "WebFetch",
+  "tool_input_preview": "{\"url\":\"http://106.37.95.242:48080/zentao/bug-browse-210.html\",\"prompt\":\"列出页面中所有bug的ID、标题、状态、严重程度。如果是登录页面，说明需要登录。\"}",
+  "error": "write EPROTO 80CC0B63D07A0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:../deps/openssl/openssl/ssl/record/ssl3_record.c:350:",
+  "timestamp": "2026-04-27T03:37:41.844Z",
+  "retry_count": 1
+}

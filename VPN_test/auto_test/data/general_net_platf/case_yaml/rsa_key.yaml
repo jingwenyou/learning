@@ -1,0 +1,60 @@
+cases:
+- case_name: 创建rsa秘钥0-0,
+  add_paras: {"keyid":[{"start":0,"end":0}],"keylen":2048,"usage":0}
+  del_paras: {"keyid":[{"start":0,"end":0}]}
+- case_name: 创建rsa秘钥1023-1023
+  add_paras: {"keyid":[{"start":1023,"end":1023}],"keylen":2048,"usage":1}
+  del_paras: {"keyid":[{"start":1023,"end":1023}]}
+- case_name: 创建rsa秘钥1-1
+  add_paras: {"keyid":[{"start":1,"end":1}],"keylen":2048,"usage":2}
+  del_paras: {"keyid":[{"start":1,"end":1}]}
+- case_name: 创建rsa秘钥1022-1022
+  add_paras: {"keyid":[{"start":1022,"end":1022}],"keylen":2048,"usage":0}
+  del_paras: {"keyid":[{"start":1022,"end":1022}]}
+- case_name: 创建rsa秘钥256-256
+  add_paras: {"keyid":[{"start":256,"end":256}],"keylen":2048,"usage":1}
+  del_paras: {"keyid":[{"start":256,"end":256}]}
+- case_name: 创建rsa秘钥1-5
+  add_paras: {"keyid":[{"start":1,"end":5}],"keylen":2048,"usage":2}
+  del_paras: {"keyid":[{"start":1,"end":1},{"start":2,"end":2}]}
+- case_name: 创建rsa秘钥1021-1023
+  add_paras: {"keyid":[{"start":1021,"end":1023}],"keylen":2048,"usage":0}
+  del_paras: {"keyid":[{"start":1021,"end":1021},{"start":1023,"end":1023}]}
+- case_name: 创建rsa秘钥0-1
+  add_paras: {"keyid":[{"start":0,"end":1}]}
+  del_paras: {"keyid":[{"start":0,"end":1}]}
+- case_name: 创建rsa秘钥1022-1023
+  add_paras: {"keyid":[{"start":1022,"end":1023}],"keylen":2048,"usage":2}
+  del_paras: {"keyid":[{"start":1022,"end":1022},{"start":1023,"end":1023}]}
+- case_name: 创建rsa秘钥0-9,删除所有秘钥
+  add_paras: {"keyid":[{"start":0,"end":9}],"keylen":2048,"usage":0}
+  del_paras: {"keyid":[{"start":0,"end":9}]}
+- case_name: 创建rsa秘钥1014-1023,删除所有密钥
+  add_paras: {"keyid":[{"start":1014,"end":1023}],"keylen":2048,"usage":1}
+  del_paras: {"keyid":[{"start":1014,"end":1023}]}
+- case_name: 创建rsa秘钥9-9,11-11
+  add_paras: {"keyid":[{"start":9,"end":9},{"start":11,"end":11}],"keylen":2048,"usage":1}
+  del_paras: {"keyid":[{"start":9,"end":9},{"start":11,"end":11}]}
+- case_name: 创建rsa秘钥0-0,1023-1023
+  add_paras: {"keyid":[{"start":1,"end":1},{"start":1023,"end":1023}],"keylen":2048,"usage":2}
+  del_paras: {"keyid":[{"start":1,"end":1}]}
+- case_name: 创建rsa秘钥0-0,5-5,1023-1023
+  add_paras:
+    keyid:
+    - start: 0
+      end: 0
+    - start: 5
+      end: 5
+    - start: 1023
+      end: 1023
+    keylen: 2048
+    usage: 0
+  del_paras:
+    keyid:
+    - {"start":1023,"end":1023}
+- case_name: 创建rsa秘钥0-0,1-1,1023-1023
+  add_paras: {"keyid":[{"start":0,"end":0},{"start":1,"end":1},{"start":1023,"end":1023}],"keylen":2048,"usage":1}
+  del_paras: {"keyid":[{"start":1,"end":1}]}
+- case_name: 创建rsa秘钥0-0,1-1,1022-1022,1023-1023
+  add_paras: {"keyid":[{"start":0,"end":0},{"start":1,"end":1},{"start":1022,"end":1022},{"start":1023,"end":1023}],"keylen":2048,"usage":2}
+  del_paras: {"keyid":[{"start":1,"end":1},{"start":1022,"end":1022}]}

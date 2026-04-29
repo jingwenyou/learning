@@ -1,0 +1,6 @@
+{
+  "tests/test_history.py::TestHistoryModule::test_init_db_creates_directory": true,
+  "tests/test_history.py::TestHistoryModule::test_get_db_connection": true,
+  "tests/test_history.py::TestHistoryModule::test_cleanup_if_needed": true,
+  "tests/test_history.py::TestHistoryModule::test_get_db_dir": true
+}

@@ -1,0 +1,480 @@
+Metadata-Version: 2.4
+Name: smart-ops-cli
+Version: 1.0.0
+Summary: 智能运维命令行工具 - 服务器健康检查与故障诊断
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: click>=8.1.0
+Requires-Dist: psutil>=5.9.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: jinja2>=3.1.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+
+# Smart Ops CLI - 智能运维命令行工具
+
+> 服务器健康检查与故障诊断CLI工具，帮助运维人员快速定位服务器问题。
+> **融入《性能之巅》性能工程方法论：USE方法论、诊断建议、指标采集**
+
+## 项目简介
+
+本项目是第四届AI编程实战大赛**赛道A：智能运维CLI工具**的参赛作品。
+
+### 核心特性
+
+- **命令行交互**：支持子命令模式 (`tool info`, `tool check`, ...)
+- **USE方法论**：每个资源检查都包含利用率(U)、饱和度(S)、错误率(E)三个维度
+- **智能诊断**：基于《性能之巅》专家知识库自动生成诊断建议
+- **多格式报告**：支持JSON、HTML、Markdown格式输出
+- **带宽监控**：支持网卡带宽利用率计算（通过ethtool获取标称带宽）
+- **OOM检测**：自动从dmesg读取内存OOM事件
+- **生产级质量**：结构化日志（JSON格式）、输入验证、Type Hints完整
+
+### 功能完成情况
+
+| 分类 | 功能 | 状态 |
+|------|------|------|
+| **必做 A-1** | 系统信息采集 | ✅ 已完成 |
+| **必做 A-2** | 健康检查（CPU/内存/磁盘/网络） | ✅ 已完成 |
+| **必做 A-3** | 端口探测 | ✅ 已完成 |
+| **必做 A-4** | 进程监控 | ✅ 已完成 |
+| **必做 A-5** | 报告导出 | ✅ 已完成 |
+| 选做 A-6 | 历史数据记录 | 🔜 待开发 |
+| **选做 A-7** | 异常诊断建议 | ✅ 已完成 |
+| **选做 A-8** | 配置化阈值 | ✅ 已完成 |
+| 选做 A-9 | 多机巡检 | 🔜 待开发 |
+| 选做 A-10 | 插件机制 | 🔜 待开发 |
+
+---
+
+## 架构说明
+
+### 模块架构图 (Mermaid)
+
+```mermaid
+flowchart TB
+    subgraph CLI["CLI 交互层"]
+        info["tool info"]
+        check["tool check"]
+        port["tool port"]
+        ps["tool ps"]
+        report["tool report"]
+        monitor["tool monitor 🔜"]
+        analyze["tool analyze 🔜"]
+    end
+
+    subgraph Core["核心业务层"]
+        subgraph Collection["系统信息采集 (system.py)"]
+            CPU["CPU采集<br/>/proc/stat解析<br/>USE: user/system/iowait/irq/softirq"]
+            Mem["内存采集<br/>USE: 利用率/交换饱和/OOM事件"]
+            Disk["磁盘采集<br/>USE: 利用率/await饱和度"]
+            Net["网络采集<br/>USE: 带宽利用率/错误率"]
+            Proc["进程采集<br/>Saturation: 线程/FD/僵尸"]
+        end
+
+        subgraph Health["健康检查 (health.py)"]
+            Thresh["阈值检测<br/>CPU/内存/磁盘/网络"]
+            Diag["诊断引擎<br/>DIAGNOSTIC_ADVICE知识库"]
+        end
+    end
+
+    subgraph Support["支撑服务层"]
+        Config["配置管理<br/>config/default.yaml"]
+        Future["数据存储(选做A-6)<br/>插件机制(选做A-10)"]
+    end
+
+    CLI --> Core
+    Core --> Support
+    Collection --> Health
+```
+
+### 数据流向图
+
+```mermaid
+flowchart LR
+    A[用户输入] --> B[CLI解析]
+    B --> C[系统信息采集<br/>psutil + /proc/stat]
+    C --> D[健康检查判定<br/>阈值 + USE方法论]
+    D --> E[诊断引擎<br/>知识库匹配]
+    E --> F[报告生成<br/>JSON/HTML/Markdown]
+    F --> G[输出]
+```
+
+### 项目结构
+
+```
+smart-ops-cli/
+├── README.md                 # 项目文档
+├── requirements.txt          # Python依赖
+│
+├── src/
+│   ├── __init__.py
+│   │
+│   ├── cli/
+│   │   ├── __init__.py
+│   │   ├── main.py          # CLI入口 (python -m src.cli.main)
+│   │   └── commands.py      # 命令定义 (info/check/port/ps/report)
+│   │
+│   └── core/
+│       ├── __init__.py
+│       ├── system.py         # 系统信息采集模块
+│       │                    # ├── get_cpu_info()      CPU采集(从/proc/stat)
+│       │                    # ├── get_memory_info()    内存采集
+│       │                    # ├── get_disk_info()      磁盘采集
+│       │                    # ├── get_network_info()   网络采集+带宽
+│       │                    # ├── get_disk_io_rate()   磁盘I/O速率+await
+│       │                    # ├── get_network_io_rate() 网络I/O速率
+│       │                    # ├── get_scheduler_stats() 调度器统计
+│       │                    # └── get_memory_oom_events() OOM事件
+│       │
+│       ├── health.py         # 健康检查 + 诊断引擎
+│       │                    # ├── check()              全面检查
+│       │                    # ├── check_cpu()           CPU检查
+│       │                    # ├── check_memory()        内存检查
+│       │                    # ├── check_disk()         磁盘检查+await
+│       │                    # ├── check_network()       网络检查+带宽利用
+│       │                    # └── DIAGNOSTIC_ADVICE     诊断知识库
+│       │
+│       ├── port_scanner.py   # 端口探测
+│       │                    # ├── scan_port()          单端口扫描
+│       │                    # └── scan_ports()          批量端口扫描
+│       │
+│       ├── process_monitor.py # 进程监控
+│       │                    # ├── get_process_info()    进程详情
+│       │                    # ├── get_top_processes()  TOP N进程
+│       │                    # ├── get_process_summary() 进程概览
+│       │                    # └── find_zombie_processes() 僵尸进程
+│       │
+│       ├── types.py          # Type Hints 数据类定义
+│       │                    # ├── CPUInfo, MemoryInfo, DiskInfo
+│       │                    # ├── NetworkInfo, ProcessInfo
+│       │                    # └── HealthCheckResult
+│       │
+│       └── report_generator.py # 报告生成
+│                            # ├── generate()           生成报告
+│                            # ├── JSON格式              结构化数据
+│                            # ├── HTML格式              可视化页面
+│                            # └── Markdown格式          文档格式
+│
+│   └── utils/                # 工具模块
+│       ├── logging_config.py # 结构化日志（JSON格式）
+│       └── validators.py     # 输入验证（防注入）
+│
+├── tests/                   # 单元测试
+│   ├── __init__.py
+│   ├── test_system.py       # 系统模块测试
+│   ├── test_health.py       # 健康检查测试
+│   ├── test_port.py         # 端口探测测试
+│   ├── test_process.py      # 进程监控测试
+│   ├── test_report.py       # 报告生成测试
+│   └── test_validators.py   # 输入验证测试
+│
+├── config/
+│   └── default.yaml         # 默认阈值配置
+│
+└── docs/
+    ├── performance.txt       # 《性能之巅》知识
+    └── learning.txt          # USE/RED方法论解读
+```
+
+---
+
+## 安装依赖
+
+### 环境要求
+
+- Python 3.9+
+- Linux / macOS / Windows
+
+### 安装步骤
+
+```bash
+# 进入项目目录
+cd smart-ops-cli
+
+# 安装为可执行命令（推荐）
+pip install -e .
+
+# 或使用 pip3（Linux）
+pip3 install --break-system-packages -e .
+
+# 验证安装
+tool --version
+```
+
+### 依赖列表
+
+| 依赖 | 版本 | 用途 |
+|------|------|------|
+| click | >=8.1.0 | CLI框架，命令行交互 |
+| psutil | >=5.9.0 | 系统信息采集 |
+| pyyaml | >=6.0 | 配置文件解析 |
+| jinja2 | >=3.1.0 | 模板引擎 |
+| pytest | >=7.4.0 | 测试框架 |
+
+---
+
+## 运行方法
+
+### 基本用法
+
+```bash
+# 安装后直接使用
+tool --help
+
+# 查看子命令
+tool --help
+```
+
+### 命令格式
+
+```bash
+tool <子命令> [选项]
+```
+
+### 可用子命令
+
+| 子命令 | 说明 | 主要选项 |
+|--------|------|---------|
+| `info` | 系统信息采集 | `--format json\|table` |
+| `check` | 健康检查 | `--advice\|--no-advice`, `--thresholds <file>` |
+| `port` | 端口探测 | `--timeout <seconds>` |
+| `ps` | 进程监控 | `--sort cpu\|mem\|threads\|io`, `--num <n>`, `--zombies`, `--interval <s>` |
+| `report` | 报告导出 | `--format json\|html\|markdown`, `-o <file>` |
+
+---
+
+## 功能演示说明
+
+### 1. 系统信息采集 (`tool info`)
+
+```bash
+# 表格格式输出（推荐）
+tool info --format=table
+```
+
+**输出示例：**
+```
+=== 系统信息 (USE方法论) ===
+
+主机名: localhost
+操作系统: Linux 6.17.0-19-generic
+
+--- CPU ---
+物理核心: 4
+逻辑核心: 4
+利用率: 25.5%
+  - User: 15.2%
+  - System: 5.3%
+  - IOWait: 0.5%
+负载(1/5/15min): 0.75 / 0.54 / 0.42
+
+--- 内存 ---
+总计: 16.0 GB
+可用: 8.5 GB
+利用率: 46.9%
+交换: 0.0%
+```
+
+### 2. 健康检查 (`tool check`)
+
+```bash
+# 带诊断建议（推荐）
+tool check --advice
+
+# 使用自定义阈值文件
+tool check --thresholds /path/to/thresholds.yaml
+```
+
+**输出示例：**
+```
+=== 健康检查结果 ===
+
+✅ CPU: 正常 - 2.3% (负载: 0.07, iowait: 0.0%)
+   归一化负载: 0.07, IOWait: 0.0%
+✅ 内存: 正常 - 59.3% (已用: 1.9GB / 总计: 3.8GB, 交换: 1.8%)
+   交换使用率: 1.8%
+🚨 磁盘: 危险 - 100.0% (await: 1.0ms)
+✅ 网络: 正常 - 带宽利用: 0.0%, 错误: 0
+   带宽利用: 0.0%, 错误: 0
+
+==================================================
+🚨 诊断建议 (基于《性能之巅》方法论):
+==================================================
+  1. 使用 'iostat -xz 1' 分析I/O模式
+  2. 检查 await 响应时间是否 > 10ms
+  3. 分析 avgqu-sz 队列深度
+  4. 考虑添加索引或使用更快存储
+  5. 清理日志文件: 'find /var/log -type f -size +100M'
+  6. 清理临时文件: 'rm -rf /tmp/*'
+  7. 清理旧镜像: 'docker system prune -a'
+  8. 考虑增加存储容量
+```
+
+**检查项说明：**
+- **CPU**: 利用率、iowait、归一化负载（《性能之巅》CPU时间分解）
+- **内存**: 利用率、交换使用率、OOM事件（《性能之巅》内存饱和度）
+- **磁盘**: 使用率、await响应时间（《性能之巅》I/O饱和度)
+- **网络**: 带宽利用率、错误率、OOM事件
+
+### 3. 端口探测 (`tool port`)
+
+```bash
+tool port localhost 22 80 443 3306
+```
+
+**输出示例：**
+```
+Port 22: 🟢 开放
+Port 80: 🔴 关闭
+Port 443: 🔴 关闭
+Port 3306: 🔴 关闭
+```
+
+### 4. 进程监控 (`tool ps`)
+
+```bash
+# TOP 10 CPU进程
+tool ps --sort=cpu --num=10
+
+# TOP 10 内存进程
+tool ps --sort=mem --num=10
+
+# TOP I/O进程（类似iotop）《性能之巅》I/O分析
+tool ps --sort=io --num=10 --interval=1
+
+# 检查僵尸进程
+tool ps --zombies
+```
+
+**输出示例 - CPU/内存：**
+```
+=== 进程概览 ===
+总进程数: 358
+总线程数: 826
+每进程平均线程: 2.31
+状态分布:
+  sleeping: 254
+  idle: 103
+  running: 1
+
+=== TOP CPU进程 (TOP 5) ===
+
+ 1. PID:  1234 | CPU:  45.2% | MEM:  12.5% | 线程:  8 | python3
+    Command: tool check
+```
+
+**输出示例 - I/O（iotop风格）：**
+```
+=== TOP I/O进程 (采样1秒) ===
+排名   PID      进程名                  读KB/s        写KB/s        总KB/s
+----------------------------------------------------------------------
+1    12854    chrome               0.0          36.0         36.0
+2    1        systemd              0.0          0.0          0.0
+3    2        kthreadd             0.0          0.0          0.0
+```
+
+### 5. 报告导出 (`tool report`)
+
+```bash
+# HTML格式（推荐，可视化效果好）
+tool report --format=html -o report.html
+
+# JSON格式
+tool report --format=json -o report.json
+
+# Markdown格式
+tool report --format=markdown -o report.md
+```
+
+---
+
+## 《性能之巅》方法论集成
+
+### USE方法论
+
+每个资源检查都返回三个维度：
+
+| 维度 | 说明 | 示例 |
+|------|------|------|
+| **Utilization** | 资源忙碌时间百分比 | CPU: 25%, 内存: 65% |
+| **Saturation** | 资源排队/等待工作量 | 负载: 2.5, 交换: 10%, 带宽利用率 |
+| **Errors** | 错误发生频率 | 网络错误: 5, OOM事件 |
+
+### 数据采集指标对照
+
+| 指标类型 | 采集内容 | USE对应 | 《性能之巅》亮点 |
+|---------|---------|---------|----------------|
+| **CPU** | 利用率分解(user/system/iowait/irq/softirq)、负载、调度器统计 | ✅ USE | /proc/stat直接解析，100%时间分解 |
+| **内存** | 利用率、buffers、cached、交换、OOM事件 | ✅ USE | dmesg读取OOM killer事件 |
+| **磁盘** | 利用率、r/s、w/s、await、avgqu-sz | ✅ USE | await>10ms=饱和，动态I/O速率测量 |
+| **网络** | 流量、错误率、丢包率、带宽利用率 | ✅ USE | ethtool获取网卡带宽计算利用率 |
+| **进程** | TOP N、线程数、僵尸进程、FD | ✅ Saturation | 状态分布、饱和度信号 |
+
+### CPU采集亮点（《性能之巅》CPU时间分解）
+
+```bash
+# 从 /proc/stat 直接解析，确保时间分解 100% 准确
+cat /proc/stat
+# cpu user nice system idle iowait irq softirq steal guest guest_nice
+
+# 返回示例
+user: 1.5%, nice: 0.0%, system: 0.9%, iowait: 0.0%, irq: 0.00%, softirq: 0.10%, idle: 97.5%
+# 合计 = 100% ✓
+```
+
+### 关键性能指标阈值
+
+| 指标 | 告警阈值 | 危险阈值 | 《性能之巅》说明 |
+|------|---------|---------|---------------|
+| CPU利用率 | >70% | >90% | 资源忙碌程度 |
+| iowait | >20% | - | I/O瓶颈信号 |
+| 归一化负载 | >2.0 | >4.0 | 相对于CPU核心 |
+| 内存利用率 | >80% | >95% | 物理内存使用 |
+| 交换使用率 | >10% | >50% | 内存饱和信号 |
+| 磁盘利用率 | >80% | >90% | I/O饱和信号 |
+| I/O await | >10ms | >50ms | 磁盘响应时间(《性能之巅》重点) |
+| 带宽利用率 | >70% | >90% | 网络饱和信号 |
+
+### 诊断建议知识库
+
+基于《性能之巅》专家经验，包含以下场景的自动诊断：
+
+| 问题类型 | 诊断建议示例 |
+|---------|------------|
+| CPU高利用率 | 使用'perf top'分析热点函数；检查死循环；考虑CPU绑核 |
+| CPU高iowait | 使用'iostat -xz 1'分析磁盘I/O；考虑SSD升级 |
+| CPU高负载 | 使用'vmstat 1'观察r列；分析I/O瓶颈 |
+| 内存高利用率 | 检查内存泄漏；使用'pmap -x <pid>'分析进程内存 |
+| 内存高交换 | 使用'swapoff -a'临时禁用；调整swappiness；检查OOM |
+| 磁盘高await | 使用'iostat -xz 1'分析；检查avgqu-sz队列深度 |
+| 磁盘空间不足 | 清理日志文件；清理临时文件；清理旧镜像 |
+| 网络高饱和 | 使用'sar -n DEV 1'分析流量；考虑压缩或CDN |
+
+---
+
+## 运行测试
+
+```bash
+# 运行所有测试
+pytest tests/ -v
+
+# 运行特定测试
+pytest tests/test_system.py -v
+
+# 生成覆盖率报告
+pytest tests/ -v --cov=src --cov-report=html
+```
+
+---
+
+## 参赛信息
+
+- **大赛**: 第四届AI编程实战大赛
+- **赛道**: 赛道A - 智能运维CLI工具
+- **技术栈**: Python 3 + Click + psutil
+- **方法论**: 《性能之巅》性能工程
+
+## License
+
+MIT

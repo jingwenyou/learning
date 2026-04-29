@@ -1,0 +1,321 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1777253349605,
+  "projectRoot": "/root/AI/VPN_test",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "screenshots": {
+      "path": "screenshots",
+      "purpose": null,
+      "fileCount": 89,
+      "lastAccessed": 1777253349591,
+      "keyFiles": [
+        "01_login_page.png",
+        "01_login_page_full.png",
+        "02_captcha.png",
+        "03_before_login.png",
+        "04_dropdown.png"
+      ]
+    },
+    "script": {
+      "path": "script",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1777253349594,
+      "keyFiles": [
+        "base_login.py",
+        "permission_matrix.py",
+        "vision_login.py"
+      ]
+    },
+    "script/data": {
+      "path": "script/data",
+      "purpose": "Data files",
+      "fileCount": 2,
+      "lastAccessed": 1777253349602,
+      "keyFiles": [
+        "__init__.py",
+        "test_data.py"
+      ]
+    },
+    "script/pages": {
+      "path": "script/pages",
+      "purpose": "Page components",
+      "fileCount": 2,
+      "lastAccessed": 1777253349602,
+      "keyFiles": [
+        "__init__.py",
+        "login_page.py"
+      ]
+    },
+    "script/tests": {
+      "path": "script/tests",
+      "purpose": "Test files",
+      "fileCount": 1,
+      "lastAccessed": 1777253349603,
+      "keyFiles": [
+        "__init__.py"
+      ]
+    },
+    "script/utils": {
+      "path": "script/utils",
+      "purpose": "Utility functions",
+      "fileCount": 2,
+      "lastAccessed": 1777253349604,
+      "keyFiles": [
+        "__init__.py",
+        "captcha_solver.py"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "",
+      "accessCount": 10,
+      "lastAccessed": 1777257190693,
+      "type": "directory"
+    },
+    {
+      "path": "auto_test/testcase/VPN/UI/test_vpn_login.py",
+      "accessCount": 7,
+      "lastAccessed": 1777258704367,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/VPN/UI/test_ipsec_service.py",
+      "accessCount": 6,
+      "lastAccessed": 1777260124331,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/feature/VPN/pages/vpn_home_page.py",
+      "accessCount": 5,
+      "lastAccessed": 1777259862263,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_ui_login.py",
+      "accessCount": 3,
+      "lastAccessed": 1777255210985,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/config/devs.py",
+      "accessCount": 3,
+      "lastAccessed": 1777256363618,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/VPN/UI/test_ssl_service.py",
+      "accessCount": 3,
+      "lastAccessed": 1777260141685,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/pytest.ini",
+      "accessCount": 2,
+      "lastAccessed": 1777255182023,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/conftest.py",
+      "accessCount": 2,
+      "lastAccessed": 1777255193814,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_create_sm2.py",
+      "accessCount": 2,
+      "lastAccessed": 1777255230196,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/feature/general_net_platf/pages/base_page.py",
+      "accessCount": 2,
+      "lastAccessed": 1777255270084,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/feature/general_net_platf/pages/home_page.py",
+      "accessCount": 2,
+      "lastAccessed": 1777255294288,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/feature/general_net_platf/pages/login_page.py",
+      "accessCount": 2,
+      "lastAccessed": 1777255308066,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/conftest.py",
+      "accessCount": 2,
+      "lastAccessed": 1777257226436,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/VPN/UI/conftest.py",
+      "accessCount": 2,
+      "lastAccessed": 1777257984410,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/all.py",
+      "accessCount": 1,
+      "lastAccessed": 1777254601295,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/feature/general_net_platf/pages/sm2_page.py",
+      "accessCount": 1,
+      "lastAccessed": 1777254615981,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/common/log_util.py",
+      "accessCount": 1,
+      "lastAccessed": 1777254623375,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/config/config.ini",
+      "accessCount": 1,
+      "lastAccessed": 1777255182551,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/feature/VPN/web_api.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255194646,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/feature/VPN/uri/http_api.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1777255202608,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/common/request_util.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255203147,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_add_firewall.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255209525,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_query_firewall.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255219063,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_route_add.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255219305,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_ntp_set.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255230789,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_sm4_ui_create.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255238049,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_create_del_bond.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255238107,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase",
+      "accessCount": 1,
+      "lastAccessed": 1777255247734,
+      "type": "directory"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_sm2_batch_create.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255255714,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_reset_ukeyadmin.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255257018,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/general_net_platform/UI/test_download_websocket.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255257088,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/aw/feature/general_net_platf/pages/equip_manage_page.py",
+      "accessCount": 1,
+      "lastAccessed": 1777255278066,
+      "type": "file"
+    },
+    {
+      "path": "explore_247_8443.py",
+      "accessCount": 1,
+      "lastAccessed": 1777256179273,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/VPN/UI/test_vpn_permission.py",
+      "accessCount": 1,
+      "lastAccessed": 1777256598207,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/testcase/VPN/UI/test_audit_log.py",
+      "accessCount": 1,
+      "lastAccessed": 1777256705128,
+      "type": "file"
+    },
+    {
+      "path": "auto_test/doc/requirements.txt",
+      "accessCount": 1,
+      "lastAccessed": 1777257385044,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

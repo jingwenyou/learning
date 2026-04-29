@@ -1,0 +1,17 @@
+{
+  "agents": [
+    {
+      "agent_id": "ab5ce46b16d79e5cf",
+      "agent_type": "oh-my-claudecode:critic",
+      "started_at": "2026-04-26T05:59:02.282Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-26T06:02:11.786Z",
+      "duration_ms": 189504
+    }
+  ],
+  "total_spawned": 1,
+  "total_completed": 1,
+  "total_failed": 0,
+  "last_updated": "2026-04-26T06:02:11.897Z"
+}

@@ -1,0 +1,61 @@
+cases:
+- case_name: 创建sm9用户密钥0-0,"userid":1,签名秘钥
+  add_sm9_main_paras: {"keyid":[{"start":0,"end":0}],"usage":0}
+  add_paras: {"keyid": [{"start": 0,"end": 0}],"mkeyid": 0,"userid": "1","usage": 2}
+  del_paras: {"keyid":[{"start":0,"end":0}]}
+- case_name: 创建sm9用户密钥511-511,"userid":空格,加密秘钥
+  add_sm9_main_paras: {"keyid":[{"start":0,"end":0}],"usage":1}
+  add_paras: {"keyid": [{"start": 511,"end": 511}],"mkeyid": 0,"userid": " ","usage": 1}
+  del_paras: {"keyid":[{"start":511,"end":511}]}
+- case_name: 创建sm9用户密钥1-1,"userid":中文,签名加密秘钥
+  add_sm9_main_paras: {"keyid":[{"start":0,"end":0}],"usage":2}
+  add_paras: {"keyid": [{"start": 1,"end": 1}],"mkeyid": 0,"userid": "中文","usage": 2}
+  del_paras: {"keyid":[{"start":1,"end":1}]}
+- case_name: 创建sm9用户密钥510-510,"userid":a,签名秘钥
+  add_sm9_main_paras: {"keyid":[{"start":127,"end":127}],"usage":0}
+  add_paras: {"keyid": [{"start": 510,"end": 510}],"mkeyid": 127,"userid": "aA","usage": 0}
+  del_paras: {"keyid":[{"start":510,"end":510}]}
+- case_name: 创建sm9用户密钥0-5,签名加密秘钥,"userid":.
+  add_sm9_main_paras: {"keyid":[{"start":127,"end":127}],"usage":1}
+  add_paras: {"keyid": [{"start": 0,"end": 5}],"mkeyid": 127,"userid": ".","usage": 1}
+  del_paras: {"keyid":[{"start":0,"end":0},{"start":2,"end":2}]}
+- case_name: 创建sm9用户密钥508-510,签名秘钥,"userid":*
+  add_sm9_main_paras: {"keyid":[{"start":127,"end":127}],"usage":2}
+  add_paras: {"keyid": [{"start": 508,"end": 510}],"mkeyid": 127,"userid": "*","usage": 2}
+  del_paras: {"keyid":[{"start":508,"end":508},{"start":510,"end":510}]}
+- case_name: 创建sm9用户密钥0-1,"userid":?
+  add_sm9_main_paras: {"keyid":[{"start":0,"end":127}],"usage":0}
+  add_paras: {"keyid": [{"start": 0,"end": 1}],"mkeyid": 126,"userid": "?","usage": 0}
+  del_paras: {"keyid":[{"start":0,"end":1}]}
+- case_name: 创建sm9用户密钥510-511,加密秘钥,"userid":__init__
+  add_sm9_main_paras: {"keyid":[{"start":0,"end":127}],"usage":1}
+  add_paras: {"keyid": [{"start": 510,"end": 511}],"mkeyid": 126,"userid": "__init__","usage": 1}
+  del_paras: {"keyid":[{"start":510,"end":510},{"start":511,"end":511}]}
+- case_name: 创建sm9用户密钥9-9,11-11,"userid":1234567890qwertyuiopasdfghjklzxcvbnm
+  add_sm9_main_paras: {"keyid":[{"start":0,"end":127}],"usage":2}
+  add_paras: {"keyid": [{"start": 9,"end": 9},{"start":11,"end":11}],"mkeyid": 2,"userid": "中文$gen_len_str(32)","usage": 2}
+  del_paras: {"keyid":[{"start":11,"end":11}]}
+- case_name: 创建sm9用户密钥0-0,511-511,"userid":~`@!#$%^&*()-_+={}\[]{}:;“’<>,.?/
+  add_sm9_main_paras: {"keyid":[{"start":1,"end":1}],"usage":0}
+  add_paras: {"keyid": [{"start": 0,"end": 0},{"start":511,"end":511}],"mkeyid": 1,"userid": "~`@!#$%^&*()-_+={}|[]{}:;“’<>,.?/","usage": 0}
+  del_paras: {"keyid":[{"start":0,"end":0}]}
+- case_name: 创建sm9用户密钥0-0,5-5,511-511,"userid":\t
+  add_sm9_main_paras: {"keyid":[{"start":2,"end":2}],"usage":1}
+  add_paras: {"keyid":[{"start":0,"end":0},{"start":5,"end":5},{"start":511,"end":511}],"mkeyid": 2,"userid": "\t","usage":1}
+  del_paras: {"keyid":[{"start":511,"end":511}]}
+- case_name: 创建sm9用户密钥0-0,1-1,511-511,"userid":\n
+  add_sm9_main_paras: {"keyid":[{"start":3,"end":3}],"usage":2}
+  add_paras: {"keyid":[{"start":0,"end":0},{"start":1,"end":1},{"start":511,"end":511}],"mkeyid": 3,"userid": "\n","usage":2}
+  del_paras: {"keyid":[{"start":1,"end":1}]}
+- case_name: 创建sm9用户密钥0-0,1-1,510-510,511-511,"userid":break
+  add_sm9_main_paras: {"keyid":[{"start":126,"end":126}],"usage":1}
+  add_paras: {"keyid":[{"start":0,"end":0},{"start":510,"end":510},{"start":511,"end":511}],"mkeyid": 126,"userid": "break","usage":1}
+  del_paras: {"keyid":[{"start":0,"end":0},{"start":510,"end":510}]}
+- case_name: 创建sm9用户密钥2-2,"userid":inf
+  add_sm9_main_paras: {"keyid":[{"start":0,"end":0}],"usage":0}
+  add_paras: {"keyid":[{"start":2,"end":2}],"mkeyid": 0,"userid": "inf","usage":2}
+  del_paras: {"keyid":[{"start":2,"end":2}]}
+- case_name: 创建sm9用户密钥1-1,"userid":'null'
+  add_sm9_main_paras: {"keyid":[{"start":0,"end":0}],"usage":0}
+  add_paras: {"keyid":[{"start":1,"end":1}],"mkeyid": 0,"userid": "null","usage":2}
+  del_paras: {"keyid":[{"start":1,"end":1}]}

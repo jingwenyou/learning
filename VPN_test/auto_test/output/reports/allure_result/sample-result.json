@@ -1,0 +1,1 @@
+{"name": "示例测试用例", "status": "passed", "start": 1777270169985, "stop": 1777270169985, "uuid": "sample-test-1", "historyId": "sample-history-1", "fullName": "test.sample.test_case", "labels": [{"name": "suite", "value": "示例套件"}, {"name": "testClass", "value": "SampleTest"}, {"name": "testMethod", "value": "test_case"}]}

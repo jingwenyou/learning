@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  smart-ops:
+    build: .
+    container_name: smart-ops
+    image: smart-ops:latest
+
+    # 主机网络模式（访问宿主机/proc）
+    network_mode: host
+
+    # 资源限制
+    mem_limit: 200m
+    cpus: 0.2
+    pids_limit: 10
+
+    # 挂载必要路径
+    volumes:
+      - ./data:/home/ops/data
+      - /etc/ssh/ssh_config:/etc/ssh/ssh_config:ro
+
+    # 环境变量
+    environment:
+      - TZ=Asia/Shanghai
+      - HOME=/home/ops
+
+    # 运行用户
+    user: "1000:1000"
+
+    # 定期巡检示例命令
+    # 使用前请替换为实际的主机和密钥
+    command: >
+      monitor
+      -H "root@192.168.1.100"
+      -k /home/ops/.ssh/id_rsa
+      --interval 300
+
+    # 崩溃后自动重启
+    restart: unless-stopped
+
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/smart-ops", "check"]
+      interval: 60s
+      timeout: 30s
+      retries: 3
+      start_period: 10s
+
+    # 安全配置
+    read_only: true
+    security_opt:
+      - no-new-privileges:true

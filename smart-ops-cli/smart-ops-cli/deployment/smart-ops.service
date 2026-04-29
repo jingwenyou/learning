@@ -1,0 +1,65 @@
+[Unit]
+Description=Smart Ops CLI Performance Monitor
+Documentation=https://github.com/your-org/smart-ops-cli
+After=network-online.target network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# 运行用户（建议创建专用ops用户）
+User=ops
+Group=ops
+
+# 工作目录
+WorkingDirectory=/var/lib/smart-ops
+
+# 环境变量
+Environment="HOME=/var/lib/smart-ops"
+Environment="TZ=Asia/Shanghai"
+# 注意：SSH_AUTH_SOCK 路径需要根据实际用户UID调整
+# 使用 %t 作为 systemd 的临时目录模板
+
+# 启动命令
+# 示例：监控多台主机，每5分钟巡检
+ExecStart=/usr/local/bin/smart-ops monitor \
+    -H "root@192.168.1.100,root@192.168.1.101" \
+    -k /home/ops/.ssh/id_rsa \
+    --interval 300
+
+# 资源限制（防止耗尽系统资源）
+MemoryMax=200M
+CPUQuota=20%
+TasksMax=10
+LimitNOFILE=1024
+
+# 重启策略
+Restart=on-failure
+RestartSec=10
+
+# 启动超时（防止启动命令挂起）
+TimeoutStartSec=60
+
+# 优雅停止（防止强制终止导致数据丢失）
+TimeoutStopSec=30
+
+# 看门狗（检测服务无响应时自动重启）
+WatchdogSec=60
+
+# 日志配置（使用journald）
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=smart-ops
+
+# 安全限制
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/smart-ops
+PrivateTmp=true
+
+# 禁止交换（防止I/O暴增）
+MemorySwapMax=0
+
+[Install]
+WantedBy=multi-user.target

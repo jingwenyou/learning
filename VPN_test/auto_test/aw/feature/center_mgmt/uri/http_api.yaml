@@ -1,0 +1,3 @@
+random_url: 'https://${ip-port}/init/getRandom'
+login_url: 'https://${ip-port}/init/login'
+cert_sign_url: 'https://${ip-port}/ca/createFileByCsrFile'

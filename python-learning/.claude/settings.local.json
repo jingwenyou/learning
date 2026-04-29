@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(python3 /root/AI/python-learning/stage1/closure_demo.py)"
+    ]
+  }
+}

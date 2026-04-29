@@ -1,0 +1,2 @@
+[console_scripts]
+tool = src.cli.main:main

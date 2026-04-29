@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /root/AI/security-learning/labs/setup-labs.sh)",
+      "Bash(sort -t'/' -k1,1 -k2,2)"
+    ]
+  }
+}

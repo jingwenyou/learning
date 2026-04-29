@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gcc --version)",
+      "Bash(gdb --version)",
+      "Bash(valgrind --version)",
+      "Bash(make --version)",
+      "Bash(apt install:*)",
+      "Bash(make)",
+      "Bash(./hello)",
+      "Bash(./types)"
+    ]
+  }
+}

@@ -1,0 +1,271 @@
+cases:
+- case_name: P0-001 IPv4 基准通信
+  br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1500}
+  phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1500}
+  route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+  ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+    "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+    "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+    "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+  ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+    "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+- case_name: P0-001 IPv4 mtu 576
+  br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":576}
+  phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 576}
+  route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+  ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+    "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+    "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+    "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+  ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+    "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P0-001 IPv4 基准通信,关dpd
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "off","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P0-001 IPv4 基准通信,dpd短周期
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 3,"dpdCount": 3,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P0-001 IPv4 基准通信,dpd长周期
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 60,"dpdCount": 20,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P0-001 IPv4 基准通信+1446MTU
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1446}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1446}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P0-001 IPv4 基准通信+9000MTU
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":9000}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 9000}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P0-002 IPv6 基准通信
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-001 工作模式-传输模式验证
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "2","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P1-001 工作模式-传输模式+9000MTU
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":9000}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 9000}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "2","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P1-002 工作模式-透明模式验证
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "5","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P1-003 MTU-1400 最优值验证
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1400}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1400}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P1-003 MTU-1400 +短周期
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1400}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1400}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 1,"mode": "1","ph2Lifetime": 5, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P1-004 MTU-1280 IPv6 最小帧验证
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1280}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1280}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-004 IPV6 MTU-9000 传输模式
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":9000}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 9000}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "2","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-005 MTU-1600 巨型帧分片验证
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1600}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1600}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "1","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P1-006 周期 - 短重协商周期验证
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 1,"mode": "1","ph2Lifetime": 5, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P1-007 IPv6 传输模式
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "2","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-008 IPv6 透明模式
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "5","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-008 IPv6 透明模式+1446MTU
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1446}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1446}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "5","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-008 IPv6 1446MTU+短周期
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1446}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1446}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 1,"mode": "1","ph2Lifetime": 5, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-009 IPv6+1280MTU + 传输模式
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1280}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1280}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "2","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-010 IPv6+1280MTU + 透明模式
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1280}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1280}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "5","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-011 传输模式 + MTU1600
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1600}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1600}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "2","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}
+# - case_name: P1-012 短重协商周期 + IPv6 轮询 + 隧道模式 + MTU1500
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 1,"mode": "1","ph2Lifetime": 5, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-013 IPv6+1500MTU + 透明模式
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu":1500}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 96, "type": "ipv6"}],"mtu": 1500}
+#   route_kw: {'type': 'ipv6', 'target': "", 'masklen': 96, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv6","remoteAddrType": "static_ipv6","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 24,"mode": "5","ph2Lifetime": 60, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv6",
+#     "srcAddr": "","dstAddrType": "subnet_ipv6","dstAddr": ""}
+# - case_name: P1-011 传输模式 + MTU1600+短周期
+#   br_kw: {"name": 'bridge1',"ifname": "","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu":1600}
+#   phy_kw: {"name": "","role": "wan","proto": "static","ipaddrs": [{"ipaddr": "", "masklen": 24, "type": "ipv4"}],"mtu": 1600}
+#   route_kw: {'type': 'ipv4', 'target': "", 'masklen': 24, 'gateway': '', 'interface': ''}
+#   ike_tunnel_kw: {"name": "","type": "static","localAddrType": "static_ipv4","remoteAddrType": "static_ipv4","localAddr": "",
+#     "remoteAddr": "","remotePortNat": 4500,"remotePort": 500,"dpdOpen": "on","dpdInterval": 20,"dpdCount": 5,
+#     "pqcSign": "off","ph1Lifetime": 1,"mode": "2","ph2Lifetime": 5, "ph1ProtocolInfo": [{"hashAlg": "sm3", "encAlg": "sm4"}],
+#     "ph2ProtocolInfo": [{"packetProtocol": "esp", "hashAlg": "sm3", "encAlg": "sm4"}]}
+#   ike_policy_kw: {"spName": "","type": "static","action": "ipsec","tunnelName": "","protocol": "ANY","enable": "on","srcAddrType": "subnet_ipv4",
+#     "srcAddr": "","dstAddrType": "subnet_ipv4","dstAddr": "",}

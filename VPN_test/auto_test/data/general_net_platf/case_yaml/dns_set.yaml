@@ -1,0 +1,55 @@
+cases:
+- case_name: 配置dns,IPv4,IPv6
+  set_dns: {"server4": "${gen_ipv4()}","server6": "${gen_ipv6_addr()}"}
+  change_nds: {"server6": "${gen_ipv6_addr()}"}
+- case_name: 配置dns,IPv6
+  set_dns: {"server4": "${gen_ipv4()}","server6": "${gen_ipv6_addr()}"}
+  change_nds: {"server4": "${gen_ipv4()}"}
+- case_name: 配置dns,修改参数和添加参数一致
+  set_dns: {"server4": "8.8.8.8","server6": "2001:4860:4860::8888"}
+  change_nds: {"server4": "8.8.8.8","server6": "2001:4860:4860::8888"}
+- case_name: 配置dns,IPv4:192.168.1.1,IPv6:ff02::fb
+  set_dns: {"server4": "192.168.1.1","server6": "ff02::fb"}
+  change_nds: {"server4": "8.8.8.8","server6": "2001:4860:4860::8888"}
+- case_name: 配置dns,IPv4,IPv6
+  set_dns: {"server4": "${gen_ipv4()}","server6": "${gen_ipv6_addr()}"}
+  change_nds: {"server4": "192.168.1.1","server6": "ff02::fb"}
+- case_name: 配置dns,IPv4:224.0.0.251,IPv6:'2402:4e00::'
+  set_dns: {"server4": "224.0.0.251","server6": "2402:4e00::"}
+  change_nds: {"server4": "1.1.1.1","server6": "${gen_ipv6_addr()}"}
+- case_name: 配置dns,IPv4:192.168.1.255,IPv6
+  set_dns: {"server4": "192.168.1.255","server6": "${gen_ipv6_addr()}"}
+  change_nds: {"server4": "224.0.0.251","server6": "${gen_ipv6_addr()}"}
+- case_name: 配置dns,IPv4:224.0.0.252,IPv6
+  set_dns: {"server4": "224.0.0.252","server6": "${gen_ipv6_addr()}"}
+  change_nds: {"server4": "192.168.1.255","server6": "${gen_ipv6_addr()}"}
+- case_name: 配置dns,IPv4:255.255.255.255,IPv6
+  set_dns: {"server4": "255.255.255.255","server6": "${gen_ipv6_addr()}"}
+  change_nds: {"server4": "224.0.0.252","server6": "2602:fe::fe"}
+- case_name: 配置dns,IPv4:10.81.66.1,IPv6:'2402:4e00::'
+  set_dns: {"server4": "10.81.66.1","server6": "2402:4e00::"}
+  change_nds: {"server4": "255.255.255.255","server6": "${gen_ipv6_addr()}"}
+- case_name: 配置dns,IPv4:127.0.0.1,IPv6:ff02::fb
+  set_dns: {"server4": "127.0.0.1","server6": "1::1"}
+  change_nds: {"server4": "10.81.66.1","server6": "${gen_ipv6_addr()}"}
+- case_name: 配置dns,IPv4:192.168.1.0,IPv6
+  set_dns: {"server4": "192.168.1.0","server6": "${gen_ipv6_addr()}"}
+  change_nds: {"server4": "127.0.0.1","server6": "1::1"}
+- case_name: 配置dns,IPv4,IPv6:fe80::1
+  set_dns: {"server4": "${gen_ipv4()}","server6": "fe80::1"}
+  change_nds: {"server4": "192.168.1.0","server6": "${gen_ipv6_addr()}"}
+- case_name: 配置dns,IPv4:208.67.222.123,IPv6:'::'
+  set_dns: {"server4": "${gen_ipv4()}","server6": "::"}
+  change_nds: {"server4": "${gen_ipv4()}","server6": "fe80::1"}
+- case_name: 配置dns,IPv4:223.5.5.5,IPv6:'::1'
+  set_dns: {"server4": "223.5.5.5","server6": "::1"}
+  change_nds: {"server4": "${gen_ipv4()}","server6": "::"}
+- case_name: 配置dns,IPv4:119.29.29.29,IPv6:'ff01::1'
+  set_dns: {"server4": "119.29.29.29","server6": "ff01::1"}
+  change_nds: {"server4": "223.5.5.5","server6": "::1"}
+- case_name: 配置dns,IPv4:119.29.29.29
+  set_dns: {"server4": "119.29.29.29"}
+  change_nds: {"server4": "119.29.29.29","server6": "ff01::1"}
+- case_name: 配置dns,IPv6
+  set_dns: {"server6": "${gen_ipv6_addr()}"}
+  change_nds: {"server4": "${gen_ipv4()}"}

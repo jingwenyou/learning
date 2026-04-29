@@ -1,0 +1,4 @@
+{"t":0,"agent":"a66276e","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"ab84b07","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"af0999d","agent_type":"document-specialist","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"system","event":"skill_invoked","skill_name":"web-access"}

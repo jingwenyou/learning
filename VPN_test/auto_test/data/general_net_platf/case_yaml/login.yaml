@@ -1,0 +1,29 @@
+cases:
+- case_name: 安全管理员登录-正确账号密码
+  username: security
+  passwd: QzPm@a2*
+  expect: true
+- case_name: 异常-安全管理员登录-不输入密码 #账号被锁后
+  username: security
+  passwd:  ' '
+  expect: false
+- case_name: 审计管理员登录-正确账号密码
+  username: audit
+  passwd: QzPm@a3*
+  expect: true
+- case_name: 异常-审计管理员登录-其他管理员的密码
+  username: audit
+  passwd: 1111aaa*
+  expect: false
+- case_name: 系统管理员登录-正确账号密码
+  username: system
+  passwd: QzPm@a1*
+  expect: true
+- case_name: 异常-安全管理员登录-错误密码
+  username: security
+  passwd: abcdefg
+  expect: false
+- case_name: 异常-系统管理员登录-密码长度超长
+  username: system
+  passwd: 1111aac*************
+  expect: false
